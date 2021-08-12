@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
 import { map, mergeMap, catchError, tap } from "rxjs/operators";
 
-import { JobsService } from "src/app/jobs.service";
+import { JobsService } from "../../jobs.service";
 import * as fromJobs from "./jobs.actions";
 
 @Injectable()

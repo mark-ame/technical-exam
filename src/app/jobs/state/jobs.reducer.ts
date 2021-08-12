@@ -5,7 +5,7 @@ import {
   createFeatureSelector,
   createSelector,
 } from "@ngrx/store";
-import { Job } from "src/app/shared/models/jobs";
+import { Job } from "../../shared/models/jobs";
 
 import * as jobsActions from "./jobs.actions";
 

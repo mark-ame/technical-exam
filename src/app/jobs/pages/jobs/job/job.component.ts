@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Job, JobType } from "src/app/shared/models/jobs";
+import { Job, JobType } from "../../../../shared/models/jobs";
 
 @Component({
   selector: "app-job",

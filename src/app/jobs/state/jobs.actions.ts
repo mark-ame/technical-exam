@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Job } from "src/app/shared/models/jobs";
+import { Job } from "../../shared/models/jobs";
 
 // Fetch all jobs
 export const getJobs = createAction("[Jobs API] Get Jobs");

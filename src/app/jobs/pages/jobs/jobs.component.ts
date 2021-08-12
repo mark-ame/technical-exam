@@ -3,7 +3,7 @@ import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-import { Job } from "src/app/shared/models/jobs";
+import { Job } from "../../../shared/models/jobs";
 import * as jobsActions from "../../state/jobs.actions";
 import * as fromJobs from "../../state/jobs.reducer";
 
