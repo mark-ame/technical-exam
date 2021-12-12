@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Job } from "./shared/models/jobs";
 import jobs from "./jobs/jobs.json";
 
@@ -8,10 +8,29 @@ import jobs from "./jobs/jobs.json";
   providedIn: "root",
 })
 export class JobsService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getJobs(): Observable<Job[]> {
-    // TODO: replace this one with an actual call to a API or json-server
-    return of(jobs);
+  getJobs() {
+    return this.http.get("http://localhost:3000/jobs");
+  }
+
+  getJob(id: number) {
+    return this.http.get("http://localhost:3000/jobs/" + id);
+  }
+
+  addJob(job: Job) {
+    return this.http.post<Job>("http://localhost:3000/jobs", job);
+  }
+
+  updateJob(job: Job) {
+    return this.http.put<Job>("http://localhost:3000/jobs/" + job.id, job);
+  }
+
+  deleteJob(id: number) {
+    return this.http.delete<Job>("http://localhost:3000/jobs/" + id);
+  }
+
+  filterJob(query: string) {
+    return this.http.get("http://localhost:3000/jobs" + query);
   }
 }

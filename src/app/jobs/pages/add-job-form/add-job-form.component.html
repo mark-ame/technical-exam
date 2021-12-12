@@ -1,0 +1,48 @@
+<form [formGroup]="formGroup">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" placeholder="Title" formControlName="title">
+          <span *ngIf="title.invalid" class="error-message">Please enter title</span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="company">Company</label>
+          <input type="text" class="form-control" id="company" placeholder="Company" formControlName="company">
+          <span *ngIf="company.invalid" class="error-message">Please enter company</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-5">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="description" placeholder="Description" formControlName="description">
+          <span *ngIf="description.invalid" class="error-message">Please enter description</span>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-group">
+          <label for="link">Link</label>
+          <input type="text" class="form-control" id="link" placeholder="Link" formControlName="link">
+          <span *ngIf="link.invalid" class="error-message">Please enter link</span>
+        </div>
+      </div>
+      <div class="col-3">
+        <label for="link">Type</label>
+        <select class="custom-select" formControlName="type">
+          <option selected [value]="JobType.PartTime">Part Time</option>
+          <option [value]="JobType.FullTime">Full Time</option>
+        </select>
+        <span *ngIf="type.invalid" class="error-message">Please select type</span>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <button type="button" class="btn btn-secondary mr-1" (click)="back()">Back</button>
+      <button type="button" class="btn btn-primary" [disabled]="formGroup.invalid" (click)="addJob()">Add Job</button>
+    </div>
+  </div>
+</form>

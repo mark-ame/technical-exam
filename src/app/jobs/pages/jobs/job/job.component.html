@@ -1,9 +1,15 @@
-<div class="job" *ngIf="job">
-  <img [src]="job.logo" class="job-logo" />
+<div class="job" *ngIf="job" (click)="viewDetails(job.id, UPDATE_DESC)">
+  <div class="d-flex justify-content-between">
+    <img [src]="job.logo" class="job-logo" />
+    <div class="d-flex">
+      <button type="button" class="btn btn-primary btn-sm action-button mr-1" (click)="viewDetails(job.id, UPDATE_ALL, $event)"><i class="bi-pencil-square"></i></button>
+      <button type="button" class="btn btn-danger btn-sm action-button" (click)="onDeleteJob(job.id ,$event)"><i class="bi-trash"></i></button>
+    </div>
+  </div>
   <div class="job-meta">
     <!-- TODO: create a pipe for date -->
     <span class="job-posted">{{ job.date }}</span>
-    <span>{{ job.type === JobType.FullTime ? "Full Time" : "Part Time" }}</span>
+    <span>{{ job.type === JobType.PartTime ? "Part Time" : "Full Time" }}</span>
   </div>
   <div class="job-title">
     <a [routerLink]="['/jobs', job.id]">{{ job.title }}</a>

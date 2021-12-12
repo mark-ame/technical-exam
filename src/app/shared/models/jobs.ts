@@ -4,8 +4,9 @@ export enum JobType {
 }
 
 export interface Job {
-  id: string;
+  id: number;
   title: string;
+  description: string;
   logo: string;
   company: string;
   link: string;

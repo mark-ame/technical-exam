@@ -7,18 +7,80 @@
     </button>
   </header>
 
-  <div class="job-search py-2 my-2">
-    <input
-      type="text"
-      placeholder="Search jobs"
-      class="d-block my-2 p-2 w-100"
-    />
+  <div class="job-search py-2 my-2" *ngIf="formGroup" [formGroup]="formGroup">
+    <div class="d-flex my-2">
+      <input type="text" placeholder="Search jobs" class="flex-grow-1 mr-2" formControlName="keyword" />
+      <div class="align-self-center">
+        <button type="button" class="btn btn-primary" (click)="search()">Search</button>
+      </div>
+    </div>
+    <div class="d-flex">
+      <a class="btn btn-secondary mr-3" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+        aria-controls="collapseExample">
+        Toggle Filters
+      </a>
+      <div>
+        <button type="button" class="btn btn-primary" (click)="resetFilter()">Reset</button>
+      </div>
+    </div>
+    <div class="collapse" id="collapseExample">
+      <div class="d-flex">
+        <div>
+          <p class="filter-header">Company</p>
+          <div class="pl-1" formArrayName="companiesCheck">
+            <ng-container>
+              <ng-container *ngFor="let company of companyArray; let i = index">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [id]="'company'+i" [formControlName]="i" [value]="companiesCheck.at(i).value" [checked]="companiesCheck.at(i).value" (change)="updateCheckState(company, companiesCheck.at(i).value)">
+                  <label class="form-check-label" [for]="'company'+i">
+                    {{company}}
+                  </label>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+        <div>
+          <p class="filter-header">Title</p>
+          <div class="pl-1" formArrayName="titleCheck">
+            <ng-container>
+              <ng-container *ngFor="let title of titleArray; let i = index">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [id]="'title'+i" [formControlName]="i" [value]="titleCheck.at(i).value" [checked]="titleCheck.at(i).value" (change)="updateCheckState(title, titleCheck.at(i).value)">
+                  <label class="form-check-label" [for]="'title'+i">
+                    {{title}}
+                  </label>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+        <div formArrayName="typeCheck">
+          <p class="filter-header">Job Type</p>
+          <div class="pl-1">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="partime" [formControlName]="0">
+              <label class="form-check-label" for="partime">
+                Part Time
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="fulltime" [formControlName]="1">
+              <label class="form-check-label" for="fulltime">
+                Full Time
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
+
   <div class="job-listings my-2">
-    <ng-container *ngIf="jobs$ | async as jobs">
+    <ng-container *ngIf="searchResults$ | async as jobs">
       <ng-container *ngFor="let job of jobs; let i = index">
-        <app-job [job]="job"></app-job>
+        <app-job [job]="job"> </app-job>
       </ng-container>
     </ng-container>
   </div>
